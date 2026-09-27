@@ -23,25 +23,52 @@
     
             <div class="stat-card">
                 <h3>Total Incidents</h3>
-                <p>0</p>
+                <p>{{ total_incidents }}</p>
             </div>
     
             <div class="stat-card">
                 <h3>Open</h3>
-                <p>0</p>
+                <p>{{ open_incidents }}</p>
             </div>
     
             <div class="stat-card">
                 <h3>In Progress</h3>
-                <p>0</p>
+                <p>{{ in_progress_incidents }}</p>
             </div>
     
             <div class="stat-card">
                 <h3>Resolved</h3>
-                <p>0</p>
+                <p>{{ resolved_incidents }}</p>
             </div>
     
         </div>
+        <h2>Recent Incidents</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Incident #</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for incident in incidents %}
+        <tr>
+            <td>{{ incident["incident_number"] }}</td>
+            <td>{{ incident["category"] }}</td>
+            <td>{{ incident["location"] }}</td>
+            <td>{{ incident["incident_date"] }}</td>
+            <td>{{ incident["priority"] }}</td>
+            <td>{{ incident["status"] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
     </main>
 </body>
 </html>
