@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Campus Safety Incident Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h1>Campus Safety Incident Management System</h1>
-    <p>Manage and track fictional campus safety incidents.</p>
+    <nav>
+        <h2>Campus Safety</h2>
+
+        <a href="/">Dashboard</a>
+        <a href="#">Incidents</a>
+        <a href="#">New Incident</a>
+    </nav>
+
+    <main>
+        <h1>Dashboard</h1>
+        <p>Overview of campus safety incidents.</p>
+    
+        <div class="stats-container">
+    
+            <div class="stat-card">
+                <h3>Total Incidents</h3>
+                <p>0</p>
+            </div>
+    
+            <div class="stat-card">
+                <h3>Open</h3>
+                <p>0</p>
+            </div>
+    
+            <div class="stat-card">
+                <h3>In Progress</h3>
+                <p>0</p>
+            </div>
+    
+            <div class="stat-card">
+                <h3>Resolved</h3>
+                <p>0</p>
+            </div>
+    
+        </div>
+    </main>
 </body>
 </html>
