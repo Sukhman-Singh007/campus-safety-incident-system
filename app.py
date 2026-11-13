@@ -49,7 +49,19 @@ def init_db():
 
 
 def next_incident_number(connection):
-    row = connection.execute('SELECT MAX(id) FROM incidents').fetchone()
+    # Never reuse an incident number. Deriving the next number from the
+    # rows still in the table is not enough: deleting the newest incident
+    # would hand its number to the next one. So take the highest number
+    # ever used, counting both the numbers still present and the highest
+    # id the AUTOINCREMENT sequence has handed out (sqlite_sequence keeps
+    # it even after the row is deleted).
+    row = connection.execute('''
+        SELECT MAX(n) FROM (
+            SELECT CAST(SUBSTR(incident_number, 5) AS INTEGER) AS n FROM incidents
+            UNION ALL
+            SELECT seq FROM sqlite_sequence WHERE name = 'incidents'
+        )
+    ''').fetchone()
     next_id = (row[0] or 0) + 1
     return f'INC-{next_id:04d}'
 
